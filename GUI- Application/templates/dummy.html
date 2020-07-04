@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<title>Major Project</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    
+<style>
+#myProgress {
+  width: 75%;
+  background-color: #ddd;
+}
+
+#myBar {
+  /* width: 2%; */
+  height: 23px;
+  background-color: rgb(199, 39, 39);
+  text-align: center;
+}
+
+</style>
+<body>
+
+<!-- Navbar (sit on top) -->
+<div class="w3-top">
+    <div class="w3-bar w3-white w3-card" id="myNavbar">
+      <!-- Right-sided navbar links -->
+      <div class="w3-right w3-hide-small">
+        <!-- <a href="#about" class="w3-bar-item w3-button">ABOUT</a> -->
+        <a href="#team" class="w3-bar-item w3-button"><i class="fa fa-user"></i> TEAM</a>
+      </div>
+      <!-- Hide right-floated links on small screens and replace them with a menu icon -->
+  
+      <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="w3_open()">
+        <i class="fa fa-bars"></i>
+      </a>
+    </div>
+  </div>  
+<br><br><br>
+
+
+<h4 style="padding-left: 8%;"> <i> On a scale of 1-4, according to the given inputs our model predicts the occurance of an Accident with <b>Severity Level: {{ severity_level }} </b> </i></h4>
+<br><br>
+
+<h4 style="padding-left: 8%;"><i>And the below Progress Bar shows how confident are we on a scale of 0-100%: </i></h4>
+
+
+<br><br>
+
+<div class="container">
+<div id="myProgress">
+  <div id="myBar">{{ probability }}</div>
+</div>
+<label for="myBar" style="padding-top: 1%;"> <i> Confidence Score: {{ probability }}% </i></label>
+</div>
+
+<br><br><br>
+
+<h4 style="padding-left: 8%;"><i> <b>Comments: </b> {{ comments }}</i></h4>
+
+
+<br>
+
+
+<!-- Team Section -->
+<div class="w3-container" style="padding:128px 16px" id="team">
+    <h3 class="w3-center">THE TEAM</h3>
+    <div class="w3-row-padding w3-grayscale" style="margin-top:64px">
+      <div class="w3-col l3 m6 w3-margin-bottom">
+        <div class="w3-card">
+          <!-- <img src="/home/rajkamal/Pictures/Screenshot from 2020-04-19 08-43-03.png" alt="John" style="width:50%"> -->
+          <div class="w3-container">
+            <h3>Dr. Preethi Chandrakar</h3>
+            <p class="w3-opacity">Mentor</p>
+            <p> <b> <i> Asst. Prof @NIT Raipur</i></b></p>
+            <p> <b> <i> Mail-ID: pchandrakar.cs@nitrr.ac.in </i></b></p>
+          </div>
+        </div>
+      </div>
+      <div class="w3-col l3 m6 w3-margin-bottom">
+        <div class="w3-card">
+          <!-- <img src="/w3images/team1.jpg" alt="Jane" style="width:100%"> -->
+          <div class="w3-container">
+            <h3>Gautham Kumar</h3>
+            <p class="w3-opacity">Designer</p>
+            <p><b><i>Student @NIT Raipur</i></b></p>
+            <p> <b> <i> Mail-ID: kgautham40@gmail.com  </i></b></p>
+          </div>
+        </div>
+      </div>
+      <div class="w3-col l3 m6 w3-margin-bottom">
+          <div class="w3-card">
+            <!-- <img src="/w3images/team1.jpg" alt="Jane" style="width:100%"> -->
+            <div class="w3-container">
+              <h3>Jayanth Kumar</h3>
+              <p class="w3-opacity">Developer</p>
+              <p><b><i>Student @NIT Raipur</i></b></p>
+              <p> <b> <i> Mail-ID: jayanthgunda999@gmail.com  </i></b></p>
+            </div>
+          </div>
+        </div>
+      <div class="w3-col l3 m6 w3-margin-bottom">
+        <div class="w3-card">
+          <!-- <img src="/w3images/team4.jpg" alt="Dan" style="width:100%"> -->
+          <div class="w3-container">
+            <h3>Rajkamal</h3>
+            <p class="w3-opacity">Developer</p>
+            <p><b><i>Student @NIT Raipur</i></b></p>
+            <p> <b> <i> Mail-ID: rajkamalk99@gmail.com  </i></b></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>     
+
+<script>
+var i = 0;
+function move() {
+  if (i == 0) {
+    i = 1;
+    var elem = document.getElementById("myBar");
+    var width = 1;
+    var id = setInterval(frame, 20);
+    function frame() {
+      if (width >= {{ probability }}) {
+        clearInterval(id);
+        i = 0;
+      } else {
+        width++;
+        elem.style.width = width + "%";
+      }
+    }
+  }
+}
+
+window.onload=move;
+</script>
+
+</body>
+</html>

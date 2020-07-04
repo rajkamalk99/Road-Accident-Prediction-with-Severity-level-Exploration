@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html>
+<title>Major Project</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<style>
+
+.button1 {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #4CAF50;
+  position: centre;
+  text-align: center;
+  padding: 10px 24px;
+}
+
+.button1:hover {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.wrapper {
+    text-align: center;
+}
+
+</style>
+<body>
+
+<!-- Navbar (sit on top) -->
+<div class="w3-top">
+  <div class="w3-bar w3-white w3-card" id="myNavbar">
+    <!-- Right-sided navbar links -->
+    <div class="w3-right w3-hide-small">
+      <!-- <a href="#about" class="w3-bar-item w3-button">ABOUT</a> -->
+      <a href="#team" class="w3-bar-item w3-button"><i class="fa fa-user"></i> TEAM</a>
+    </div>
+    <!-- Hide right-floated links on small screens and replace them with a menu icon -->
+
+    <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="w3_open()">
+      <i class="fa fa-bars"></i>
+    </a>
+  </div>
+</div>
+
+    <form action="{{ url_for('predict')}}" method="post" style="padding-top: 5%;">
+      <div class="container" >
+          <div class="row" style="padding-left: 1%;">
+            <div class="col-lg-2">
+            <select class="form-control" name="Sunrise_Sunset" style="width: 50%; text-align: left;">
+              <option>Day</option>
+              <option>Night</option>
+            </select>
+            <label class="mdb-main-label" style="padding-top: 4%;">Sunrise_Sunset</label>
+          </div>
+          <div class="col-lg-2">
+            <select class="form-control" name="Timezone" style="width: 50%; text-align: left;">
+              <option>US/Central</option>
+              <option>US/Eastern</option>
+              <option>US/Mountain</option>
+              <option>US/Pacific</option>
+            </select>
+            <label class="mdb-main-label" style="padding-top: 4%;">Timezone</label>
+          </div>
+            
+          <div class="col-lg-2">
+            <select class="form-control" name="Wind_Direction" style="width: 50%; text-align: left;">
+              <option>CALM</option>
+              <option>E</option>
+              <option>ENE</option>
+              <option>ESE</option>
+              <option>East</option>
+              <option>N</option>
+              <option>NE</option>
+              <option>NNE</option>
+              <option>NNW</option>
+              <option>NW</option>
+              <option>North</option>
+              <option>S</option>
+              <option>SE</option>
+              <option>SSE</option>
+              <option>SSW</option>
+              <option>SW</option>
+              <option>South</option>
+              <option>VAR</option>
+              <option>Variable</option>
+              <option>W</option>
+              <option>WNW</option>
+              <option>WSW</option>
+              <option>West</option>
+            </select>
+            <label class="mdb-main-label" style="padding-top: 4%;">Wind_Direction</label>
+          </div>
+
+            <div class="col-lg-2">
+            <select class="form-control" name="Weather_Condition" style="width: 50%; text-align: left;">
+              <option>Blowing Snow</option>
+              <option>Clear</option>
+              <option>Cloudy</option>
+              <option>Cloudy / Windy</option>
+              <option>Drizzle</option>
+              <option>Fair</option>
+              <option>Fair / Windy</option>
+              <option>Fog</option>
+              <option>Fog / Windy</option>
+              <option>Haze</option>
+              <option>Heavy Drizzle</option>
+              <option>Heavy Rain</option>
+              <option>Heavy Rain / Windy</option>
+              <option>Heavy Snow</option>
+              <option>Heavy T-Storm</option>
+              <option>Heavy Thunderstorms and Rain</option>
+              <option>Heavy Thunderstorms and Snow</option>
+              <option>Light Drizzle</option>
+              <option>Light Freezing Drizzle</option>
+              <option>Light Freezing Fog</option>
+              <option>Light Freezing Rain</option>
+              <option>Light Haze</option>
+              <option>Light Ice Pellets</option>
+              <option>Light Rain</option>
+              <option>Light Rain / Windy</option>
+              <option>Light Snow</option>
+              <option>Mostly Cloudy</option>
+              <option>Overcast</option>
+              <option>Partly Cloudy</option>
+              <option>Rain</option>
+              <option>Scattered Clouds</option>
+            </select>
+            <label class="mdb-main-label" style="padding-top: 4%;">Weather_Condition</label>
+            </div>
+
+            <div class="col-lg-2">
+              <select class="form-control" name="Turning_Loop" style="width: 50%; text-align: right;">
+                <option>0.0</option>
+                <option>1.0</option>             
+               </select>
+              <label class="mdb-main-label" style="padding-top: 4%;">Turning_Loop</label>
+            </div>
+
+            <div class="col-lg-2">
+              <select class="form-control" name="Hour" style="width: 50%; text-align: right;">
+                <option>0.0</option>
+                <option>1.0</option>
+                <option>2.0</option>
+                <option>3.0</option>  
+                <option>4.0</option>
+                <option>5.0</option>  
+                <option>6.0</option>
+                <option>7.0</option>  
+                <option>8.0</option>
+                <option>9.0</option>  
+                <option>10.0</option>
+                <option>11.0</option>  
+                <option>12.0</option>
+                <option>13.0</option>  
+                <option>14.0</option>
+                <option>15.0</option>  
+                <option>16.0</option>
+                <option>17.0</option>  
+                <option>18.0</option>
+                <option>19.0</option>  
+                <option>20.0</option>
+                <option>21.0</option>
+                <option>22.0</option>
+                <option>23.0</option>               
+               </select>
+              <label class="mdb-main-label" style="padding-top: 4%;">Hour</label>
+            </div>
+
+          </div>
+
+          <div class="row" style="padding-top: 2%; padding-left: 1%;">
+
+            <div class="col-lg-2">
+
+              <select class="form-control" name="Weekday" style="width: 50%; text-align: right;">
+                <option>Fri</option>
+                <option>Mon</option>
+                <option>Sat</option>
+                <option>Sun</option>
+                <option>Thu</option>
+                <option>Tue</option>
+                <option>Wed</option>
+              </select>
+              <label class="mdb-main-label" style="padding-top: 4%;">Weekday</label>
+            </div>
+
+            <div class="col-lg-2">
+              <select class="form-control" name="Side" style="width: 50%; text-align: right;">
+                <option>L</option>
+                <option>R</option>
+              </select>
+              <label class="mdb-main-label" style="padding-top: 4%;">Side</label>
+            </div>
+
+            <div class="col-lg-2">
+              
+              <input type="text" name="City" style="width: 50%;padding-top: 3%; padding-left: 1%;" value="North Olmsted">
+              <br>
+              <label class="mdb-main-label" style="padding-top: 2%;">City</label>
+            </div>
+
+            <div class="col-lg-2">
+              
+            <input type="text" name="County" style="width: 50%;padding-top: 3% ;padding-left: 1%;" value="Cuyahoga">
+            <br>
+            <label class="mdb-main-label" style="padding-top: 2%;">County</label>
+
+            </div>
+
+            <div class="col-lg-2">
+              
+              <input type="text" name="State" style="width: 50%;padding-top: 3% padding-left: 1%;;" value="OH">
+              <br>
+              <label class="mdb-main-label" style="padding-top: 2%;">State</label>
+  
+              </div>  
+
+              <div class="col-lg-2">
+              
+                <input type="number" step="0.01" name="TMC" style="width: 50%;padding-top: 3% padding-left: 1%;;" value= "201.0">
+                <br>
+                <label class="mdb-main-label" style="padding-top: 2%;">TMC</label>
+    
+                </div>    
+          </div>
+
+          <div class="row" style="padding-top: 1%; padding-left: 1%;">
+            <div class="col-lg-2">
+      
+              <input type="number" step="0.01"  name="Start_Lat" style="width: 50%;padding-top: 3% padding-left: 1%;;" value="41.4">
+              <br>
+              <label class="mdb-main-label" style="padding-top: 2%;">Start_Lat</label>
+
+            </div>
+
+            <div class="col-lg-2">
+              
+              <input type="number" step="0.01" name="Start_Lng" style="width: 50%;padding-top: 3% padding-left: 1%;;" value="-81.94">
+              <br>
+              <label class="mdb-main-label" style="padding-top: 2%;">Start_Lng</label>
+      
+            </div>
+
+            <div class="col-lg-2">
+
+              <input type="number" step="0.01" name="Temperature(F)" style="width: 50%;padding-top: 3% padding-left: 1%;;" value="33.1">
+              <br>
+              <label class="mdb-main-label" style="padding-top: 2%;">Temperature(F)</label>
+              
+            </div>
+
+            <div class="col-lg-2">
+
+              <input type="number" step="0.01" name="Humidity(%)" style="width: 50%;padding-top: 3% padding-left: 1%;;" value="82.0">
+              <br>
+              <label class="mdb-main-label" style="padding-top: 2%;">Humidity(%)</label>
+              
+            </div>
+
+            <div class="col-lg-2">
+
+              <input type="number" step="0.01" name="Pressure(in)" style="width: 50%;padding-top: 3% padding-left: 1%;;" value="29.95">
+              <br>
+              <label class="mdb-main-label" style="padding-top: 2%;">Pressure(in)</label>
+              
+            </div>
+
+            <div class="col-lg-2">
+
+              <input type="number" step="0.01" name="Visibility(mi)" style="width: 50%;padding-top: 3% padding-left: 1%;;" value="7.0">
+              <br>
+              <label class="mdb-main-label" style="padding-top: 2%;">Visibility(mi)</label>
+              
+            </div>
+
+          </div>
+
+          <div class="row" style="padding-top: 1%; padding-left: 1%;">
+          
+            <div class="col-lg-2">
+              <select class="form-control" name="Amenity" style="width: 50%; text-align: right;">
+                <option>0.0</option>
+                <option>1.0</option>
+              </select>
+              <label class="mdb-main-label" style="padding-top: 4%;">Amenity</label>
+            </div>
+          
+            <div class="col-lg-2">
+              <select class="form-control" name="Bump" style="width: 50%; text-align: right;">
+                <option>0.0</option>
+                <option>1.0</option>
+              </select>
+              <label class="mdb-main-label" style="padding-top: 4%;">Bump</label>
+            </div>
+          
+            <div class="col-lg-2">
+              <select class="form-control" name="seCrossingl1" style="width: 50%; text-align: right;">
+                <option>0.0</option>
+                <option>1.0</option>
+              </select>
+              <label class="mdb-main-label" style="padding-top: 4%;">Crossing</label>
+            </div>
+          
+            
+            <div class="col-lg-2">
+              <select class="form-control" name="Give_Way" style="width: 50%; text-align: right;">
+                <option>0.0</option>
+                <option>1.0</option>
+              </select>
+              <label class="mdb-main-label" style="padding-top: 4%;">Give_Way</label>
+            </div>
+          
+            <div class="col-lg-2">
+              <select class="form-control" name="Junction" style="width: 50%; text-align: right;">
+                <option>0.0</option>
+                <option>1.0</option>             
+               </select>
+              <label class="mdb-main-label" style="padding-top: 4%;">Junction</label>
+            </div>
+          
+            <div class="col-lg-2">
+              <select class="form-control" name="No_Exit" style="width: 50%; text-align: right;">
+                <option>0.0</option>
+                <option>1.0</option>
+               </select>
+              <label class="mdb-main-label" style="padding-top: 4%;">No_Exit</label>
+            </div>
+
+          </div>
+
+
+          <div class="row" style="padding-top: 1%; padding-left: 1%;">
+          
+            <div class="col-lg-2">
+              <select class="form-control" name="Railway" style="width: 50%; text-align: right;">
+                <option>0.0</option>
+                <option>1.0</option>
+              </select>
+              <label class="mdb-main-label" style="padding-top: 4%;">Railway</label>
+            </div>
+          
+            <div class="col-lg-2">
+              <select class="form-control" name="Roundabout" style="width: 50%; text-align: right;">
+                <option>0.0</option>
+                <option>1.0</option>
+              </select>
+              <label class="mdb-main-label" style="padding-top: 4%;">Roundabout</label>
+            </div>
+          
+            <div class="col-lg-2">
+              <select class="form-control" name="Station" style="width: 50%; text-align: right;">
+                <option>0.0</option>
+                <option>1.0</option>
+              </select>
+              <label class="mdb-main-label" style="padding-top: 4%;">Station</label>
+            </div>
+          
+            
+            <div class="col-lg-2">
+              <select class="form-control" name="Stop" style="width: 50%; text-align: right;">
+                <option>0.0</option>
+                <option>1.0</option>
+              </select>
+              <label class="mdb-main-label" style="padding-top: 4%;">Stop</label>
+            </div>
+          
+            <div class="col-lg-2">
+              <select class="form-control" name="Traffic_Calming" style="width: 50%; text-align: right;">
+                <option>0.0</option>
+                <option>1.0</option>
+               </select>
+              <label class="mdb-main-label" style="padding-top: 4%;">Traffic_Calming</label>
+            </div>
+
+            <div class="col-lg-2">
+              <select class="form-control" name="Amenity" style="width: 50%; text-align: right;">
+                <option>0.0</option>
+                <option>1.0</option>
+              </select>
+              <label class="mdb-main-label" style="padding-top: 4%;">Traffic_Signal</label>
+            </div>
+          
+          </div>
+      </div>
+
+      <br><br><br>
+      <div class="wrapper">
+
+        <button type="submit" class="button button1" value="Submit" >Get the accident Prediction with Sevrity</button>
+
+    </div>
+
+    </form>
+
+<!-- Team Section -->
+<div class="w3-container" style="padding:128px 16px" id="team">
+  <h3 class="w3-center">THE TEAM</h3>
+  <div class="w3-row-padding w3-grayscale" style="margin-top:64px">
+    <div class="w3-col l3 m6 w3-margin-bottom">
+      <div class="w3-card">
+        <!-- <img src="/home/rajkamal/Pictures/Screenshot from 2020-04-19 08-43-03.png" alt="John" style="width:50%"> -->
+        <div class="w3-container">
+          <h3>Dr. Preethi Chandrakar</h3>
+          <p class="w3-opacity">Mentor</p>
+          <p> <b> <i> Asst. Prof @NIT Raipur</i></b></p>
+          <p> <b> <i> Mail-ID: pchandrakar.cs@nitrr.ac.in </i></b></p>
+        </div>
+      </div>
+    </div>
+    <div class="w3-col l3 m6 w3-margin-bottom">
+      <div class="w3-card">
+        <!-- <img src="/w3images/team1.jpg" alt="Jane" style="width:100%"> -->
+        <div class="w3-container">
+          <h3>Gautham Kumar</h3>
+          <p class="w3-opacity">Designer</p>
+          <p><b><i>Student @NIT Raipur</i></b></p>
+          <p> <b> <i> Mail-ID: kgautham40@gmail.com  </i></b></p>
+        </div>
+      </div>
+    </div>
+    <div class="w3-col l3 m6 w3-margin-bottom">
+        <div class="w3-card">
+          <!-- <img src="/w3images/team1.jpg" alt="Jane" style="width:100%"> -->
+          <div class="w3-container">
+            <h3>Jayanth Kumar</h3>
+            <p class="w3-opacity">Developer</p>
+            <p><b><i>Student @NIT Raipur</i></b></p>
+            <p> <b> <i> Mail-ID: jayanthgunda999@gmail.com  </i></b></p>
+          </div>
+        </div>
+      </div>
+    <div class="w3-col l3 m6 w3-margin-bottom">
+      <div class="w3-card">
+        <!-- <img src="/w3images/team4.jpg" alt="Dan" style="width:100%"> -->
+        <div class="w3-container">
+          <h3>Rajkamal</h3>
+          <p class="w3-opacity">Developer</p>
+          <p><b><i>Student @NIT Raipur</i></b></p>
+          <p> <b> <i> Mail-ID: rajkamalk99@gmail.com  </i></b></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 
+
+<!-- Footer -->
+<footer class="w3-center w3-black w3-padding-64">
+  <a href="#home" class="w3-button w3-light-grey"><i class="fa fa-arrow-up w3-margin-right"></i>To the top</a>
+</footer>
+ 
+<script>
+// Modal Image Gallery
+function onClick(element) {
+  document.getElementById("img01").src = element.src;
+  document.getElementById("modal01").style.display = "block";
+  var captionText = document.getElementById("caption");
+  captionText.innerHTML = element.alt;
+}
+
+// Toggle between showing and hiding the sidebar when clicking the menu icon
+var mySidebar = document.getElementById("mySidebar");
+
+function w3_open() {
+  if (mySidebar.style.display === 'block') {
+    mySidebar.style.display = 'none';
+  } else {
+    mySidebar.style.display = 'block';
+  }
+}
+
+// Close the sidebar with the close button
+function w3_close() {
+    mySidebar.style.display = "none";
+}
+
+</script>
+
+</body>
+</html>
+
